@@ -1,4 +1,4 @@
-﻿namespace STFCTools.PlayerHighScore;
+﻿namespace STFCTools.PlayerHighScore.Models;
 
 internal class PlayerDataCollection
 {
@@ -7,6 +7,6 @@ internal class PlayerDataCollection
 
 	public PlayerDataCollection()
 	{
-		Players = new List<PlayerData>();
+		Players = [];
 	}
 }

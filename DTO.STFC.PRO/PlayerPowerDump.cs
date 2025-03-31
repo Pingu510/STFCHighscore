@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace STFCTools.PlayerHighScore.DTO.STFC.WTF;
+namespace STFCTools.PlayerHighScore.DTO.STFC.PRO;
 
 internal class PlayerPowerDump
 {
