@@ -24,7 +24,7 @@ internal class Program
         //                + serverId + "&sortBy=rank&sortOrder=asc&tag="
         //    + allianceName + "&rankMatch=true";
 
-        //DownloadDataAndSaveToFile((allianceScoreSource), baseLocation + nameof(allianceScoreSource) + ".json");
+        DownloadDataAndSaveToFile((allianceScoreSource), baseLocation + nameof(allianceScoreSource) + ".json");
         GetDataAndDecodeAllianceDetails(baseLocation + nameof(allianceScoreSource) + ".json");
         var playerData = GetPlayersFromJson(baseLocation + "members.json");
         var playerCollection = DataFetch.PlayerDataFromDTO(playerData);
