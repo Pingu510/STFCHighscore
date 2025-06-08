@@ -4,7 +4,7 @@ namespace STFCTools.PlayerHighScore.DTO.STFC.PRO;
 
 internal class Player
 {
-    #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
     [JsonPropertyName("playerid")]
     public object PlayerId { get; set; }
@@ -107,4 +107,39 @@ internal class Player
 
     [JsonPropertyName("lastmodified")]
     public DateTime LastModified { get; set; }
+
+
+
+    // Tournament related properties
+
+    [JsonPropertyName("score")]
+    public int? TournamentScore { get; set; }
+
+    [JsonPropertyName("position")]
+    public int? TournamentPosition { get; set; }
+
+    [JsonPropertyName("dailyCompleted")]
+    public int? DailyCompleted { get; set; }
+
+    [JsonPropertyName("totalTasks")]
+    public int? TotalTasks { get; set; }
+
+    [JsonPropertyName("completedTasks")]
+    public int? CompletedTasks { get; set; }
+
+    [JsonPropertyName("assignedTask")]
+    public int? AssignedTask { get; set; }
+
+    [JsonPropertyName("activeTask")]
+    public string ActiveTask { get; set; }
+
+    [JsonPropertyName("activeTaskDesc")]
+    public string ActiveTaskDesc { get; set; }
+
+    [JsonPropertyName("tasks")]
+    public string Tasks { get; set; }
+
+    [JsonPropertyName("dailyTasks")]
+    public string DailyTasks { get; set; }
+
 }
