@@ -27,9 +27,11 @@ internal static class DataFetch
 		{
 			c.Players.Add(new PlayerData()
 			{				
+				PlayerId = (player.PlayerId.ToString() ?? string.Empty),
 				Name = player.Owner ?? string.Empty,				
 				Power = player.MaxPower.ToString() ?? string.Empty,
-                TournamentTasks = player.Tasks ?? string.Empty,
+                StartedTasks = player.TotalTasks.ToString() ?? string.Empty,
+				CompletedTasks = player.CompletedTasks.ToString() ?? string.Empty,
                 TornamentScore = player.TournamentScore?.ToString() ?? string.Empty
             });
 		}

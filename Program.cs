@@ -272,7 +272,7 @@ internal class Program
 
         l.AddRange(dataCollection.Players.Select(x =>
         {
-            return $"{x.Name}\t{x.Power}";
+            return $"{x.PlayerId}\t{x.Name}\t{x.Power}";
         }).ToList());
 
         FileHelper.SaveListToFile(path, l);
@@ -284,7 +284,7 @@ internal class Program
         var l = new List<string>() { dataCollection.CreationDate.ToLongDateString() };
         l.AddRange(dataCollection.Players.Select(x =>
         {
-            return $"{x.Name}\t{x.TournamentTasks}\t{x.TornamentScore}";
+            return $"{x.PlayerId}\t{x.Name}\t{x.CompletedTasks}\t{x.StartedTasks}\t{x.TornamentScore}";
         }).ToList());
         FileHelper.SaveListToFile(path, l);
     }
