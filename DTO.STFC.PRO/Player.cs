@@ -61,10 +61,10 @@ internal class Player
     public string Region { get; set; }
 
     [JsonPropertyName("power")]
-    public uint? Power { get; set; }
+    public long? Power { get; set; }
 
     [JsonPropertyName("max_power")]
-    public uint? MaxPower { get; set; }
+    public long? MaxPower { get; set; }
 
     [JsonPropertyName("pd")]
     public object PowerDestroyed { get; set; }
