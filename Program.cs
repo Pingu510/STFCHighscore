@@ -261,7 +261,7 @@ internal class Program
 
         p.Add(new PlayerData()); p.Add(new PlayerData()); p.Add(new PlayerData()); p.Add(new PlayerData()); p.Add(new PlayerData());
         p.AddRange(skipped.OrderBy(x => x.Name));
-        p.AddRange(currentMembers.OrderBy(x => x.Name));
+        p.AddRange(currentMembers.OrderBy(x => x.PlayerId));
         dataCollection.Players = p;
         return dataCollection;
     }
