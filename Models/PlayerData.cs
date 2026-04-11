@@ -1,8 +1,5 @@
 ﻿namespace STFCTools.PlayerHighScore.Models;
 
-/// <summary>
-/// Name, Power
-/// </summary>
 internal class PlayerData
 {
     public string PlayerId { get; set; } = string.Empty;

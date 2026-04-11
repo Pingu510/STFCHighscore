@@ -24,6 +24,7 @@ internal class Program
         string allianceDetailsSource = @"https://stfc.wtf/api/allianceDetails?";
         var allianceId = "2495300849";
 
+        #region Set other alliance id
         if (args.Length != 0)
         {
             if (args.Length == 1)
@@ -46,9 +47,11 @@ internal class Program
         {
             Console.WriteLine("No allianceId provided, using default: " + allianceId);
         }
+        #endregion
 
         var p = new Program();
         PlayerDataCollection players;
+
         switch (p.Settings())
         {
             case 1:
@@ -104,15 +107,17 @@ internal class Program
         GetDataAndDecodeAllianceDetails(baseLocation + name + ".json", baseLocation);
         var playerData = GetPlayersFromJson(baseLocation + "members.json");
         var playerCollection = DataFetch.PlayerDataFromDTO(playerData);
-        List<string> playerOrder = [];
+        List<PlayerOrder> playerOrder = [];
 
         // check input variations
         try
         {
-            playerOrder = FileHelper.ReadFileToList(playerOrderLocation);
+            //rawPlayerOrder = FileHelper.ReadFileToList(playerOrderLocation);
+            playerOrder = DataFetch.PlayerOrderFromPreviousList(FileHelper.ReadFileToList(playerOrderLocation));
+
             if (UpdateNamesQuery(playerCollection, playerOrder, playerOrderLocation))
             {
-                playerOrder = FileHelper.ReadFileToList(playerOrderLocation);
+                playerOrder = DataFetch.PlayerOrderFromPreviousList(FileHelper.ReadFileToList(playerOrderLocation));
             }
         }
         catch (FileNotFoundException)
@@ -217,12 +222,9 @@ internal class Program
         }
     }
 
-
-
-
-    static bool UpdateNamesQuery(PlayerDataCollection dataCollection, List<string> oldOrder, string Location)
+    static bool UpdateNamesQuery(PlayerDataCollection dataCollection, List<PlayerOrder> oldOrder, string Location)
     {
-        var listdiff = dataCollection.Players.Where(n => !oldOrder.Any(o => n.PlayerId == o));
+        var listdiff = dataCollection.Players.Where(n => !oldOrder.Any(o => n.PlayerId == o.PlayerId));
         if (listdiff.Any())
         {
             Console.WriteLine("Found new names:");
@@ -237,15 +239,15 @@ internal class Program
         return false;
     }
 
-    static PlayerDataCollection FilterPlayerData(PlayerDataCollection dataCollection, List<string> oldOrder)
+    static PlayerDataCollection FilterPlayerData(PlayerDataCollection dataCollection, List<PlayerOrder> oldOrder)
     {
         var currentMembers = dataCollection.Players;
         var p = new List<PlayerData>();
         var skipped = new List<PlayerData>();
 
-        foreach (var member in oldOrder)
+        foreach (var row in oldOrder)
         {
-            var foundPlayer = currentMembers.Find(x => x.PlayerId == member);
+            var foundPlayer = currentMembers.Find(x => x.PlayerId == row.PlayerId);
             if (foundPlayer != null)
             {
                 p.Add(foundPlayer);
@@ -255,7 +257,7 @@ internal class Program
             else
             {
                 p.Add(new PlayerData());
-                skipped.Add(new PlayerData() { Name = member });
+                skipped.Add(new PlayerData() { PlayerId = row.PlayerId, Name = row.Name });
             }
         }
 
