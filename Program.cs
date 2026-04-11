@@ -222,13 +222,13 @@ internal class Program
 
     static bool UpdateNamesQuery(PlayerDataCollection dataCollection, List<string> oldOrder, string Location)
     {
-        var listdiff = dataCollection.Players.Where(n => !oldOrder.Any(o => n.Name == o));
+        var listdiff = dataCollection.Players.Where(n => !oldOrder.Any(o => n.PlayerId == o));
         if (listdiff.Any())
         {
             Console.WriteLine("Found new names:");
             foreach (var player in listdiff)
             {
-                Console.WriteLine(player.Name);
+                Console.WriteLine(player.PlayerId + '-' + player.Name);
             }
             Console.WriteLine("Press any button when you have updated the input list at: " + Location);
             Console.ReadKey();
@@ -245,7 +245,7 @@ internal class Program
 
         foreach (var member in oldOrder)
         {
-            var foundPlayer = currentMembers.Find(x => x.Name == member);
+            var foundPlayer = currentMembers.Find(x => x.PlayerId == member);
             if (foundPlayer != null)
             {
                 p.Add(foundPlayer);
